@@ -15,7 +15,7 @@ const BgProvider: React.FC<BgProviderProps> = ({
     >
       <div
         className={`bg-black w-full h-full ${
-          removeBgOnMobile ? "lg:bg-opacity-60" : "bg-opacity-80"
+          removeBgOnMobile ? "lg:bg-opacity-60" : "bg-opacity-60"
         }`}
       >
         {children}

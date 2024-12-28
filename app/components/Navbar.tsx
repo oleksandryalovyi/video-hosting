@@ -79,8 +79,9 @@ function Navbar({ username }: NavbarProps) {
             className="h-24 w-36"
             alt="Logo"
           />
+
           <button
-            onClick={() => router.push("/login")}
+            onClick={() => router.push("/auth")}
             className="
                 flex
                 flex-row

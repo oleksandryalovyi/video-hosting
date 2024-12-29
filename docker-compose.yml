@@ -1,3 +1,4 @@
+# Description: Docker compose file for creating a MongoDB replica set with 1 node for local development
 services:
   mongo1:
     hostname: mongo1

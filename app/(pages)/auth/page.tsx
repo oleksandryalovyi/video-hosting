@@ -2,11 +2,14 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
+import axios from "axios";
 
 import BgProvider from "@/app/components/BgProvider";
 import Routes from "@/app/router/routes";
 import Input from "@/app/components/Input";
+import ApiRoutes from "@/app/router/apiRoutes";
 
 enum VariantEnum {
   login = "login",
@@ -28,8 +31,32 @@ const AuthPage: React.FC = () => {
     );
   };
 
-  const login = () => {};
-  const register = () => {};
+  const login = async () => {
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: true,
+        callbackUrl: Routes.HOME,
+      });
+    } catch (e) {
+      console.error("login error", e);
+    }
+  };
+
+  const register = async () => {
+    try {
+      await axios.post(ApiRoutes.REGISTER, {
+        email,
+        password,
+        username,
+      });
+
+      login();
+    } catch (e) {
+      console.error("register error", e);
+    }
+  };
 
   return (
     <BgProvider removeBgOnMobile>

@@ -133,7 +133,7 @@ const AuthPage: React.FC = () => {
                 cursor-pointer
                 hover:opacity-80
                 transition"
-              onClick={() => console.log("google")}
+              onClick={() => signIn("google", { callbackUrl: Routes.HOME })}
             >
               <FaGoogle size={32} />
             </div>
@@ -147,7 +147,7 @@ const AuthPage: React.FC = () => {
                 cursor-pointer
                 hover:opacity-80
                 transition"
-              onClick={() => console.log("github")}
+              onClick={() => signIn("github", { callbackUrl: Routes.HOME })}
             >
               <FaGithub size={32} />
             </div>

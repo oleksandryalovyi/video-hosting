@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import CognitoProvider from "next-auth/providers/cognito";
 
 import prisma from "@/app/utils/prismadb";
 
@@ -17,6 +18,11 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.NEXT_AUTH_GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.NEXT_AUTH_GOOGLE_CLIENT_SECRET as string,
+    }),
+    CognitoProvider({
+      clientId: process.env.NEXT_AUTH_COGNITO_CLIENT_ID as string,
+      clientSecret: process.env.NEXT_AUTH_COGNITO_CLIENT_SECRET as string,
+      issuer: process.env.NEXT_AUTH_COGNITO_ISSUER as string,
     }),
     CredentialsProvider({
       name: "credentials",
@@ -48,7 +54,7 @@ export const authOptions: AuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth",
+    signIn: "/",
   },
   session: {
     strategy: "jwt",

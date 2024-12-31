@@ -2,11 +2,10 @@
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import Image from "next/image";
-import Navlink from "./Navlink";
+import { signIn } from "next-auth/react";
 
-type NavbarProps = Readonly<{
-  username?: string;
-}>;
+import Navlink from "./Navlink";
+import Routes from "../router/routes";
 
 enum NavbarLinks {
   "/" = "Home",
@@ -14,17 +13,17 @@ enum NavbarLinks {
   "/favorites" = "Favorites",
 }
 
-function Navbar({ username }: NavbarProps) {
+function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
 
   return (
     <div className="w-full fixed z-40">
-      {username ? (
+      {false ? (
         <div className="px-4 md:px-16 py-6 flex flex-row justify-between items-center transition duration-300">
           <div className="flex flex-row items-center">
             <Image
-              onClick={() => router.push("/")}
+              onClick={() => router.push(Routes.HOME)}
               width={200}
               height={50}
               src="/images/logo.svg"
@@ -64,7 +63,7 @@ function Navbar({ username }: NavbarProps) {
                 rounded-[4px]
                 hover:bg-red-700
                 transition"
-              onClick={() => console.log("logout")}
+              onClick={() => console.log("Logout")}
             >
               Logout
             </button>
@@ -81,7 +80,7 @@ function Navbar({ username }: NavbarProps) {
           />
 
           <button
-            onClick={() => router.push("/auth")}
+            onClick={() => signIn("cognito", { callbackUrl: Routes.HOME })}
             className="
                 flex
                 flex-row
